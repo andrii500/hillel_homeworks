@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Homework 3</title>
+</head>
+<body>
+    <a href='../requirements' style='text-decoration: none'>requirements</a><br>
+    <a id='a' href='../generate-users' style='text-decoration: none' onclick='get_num(this)'>generate-users</a> /
+    <input type='number' min="1" value="1" style='width: 60px' id='num_input' autocomplete="off"><br>
+    <a href='../mean' style='text-decoration: none'>mean</a><br>
+    <a href='../space' style='text-decoration: none'>space</a>
+    <script>
+        function get_num(el){
+            el.href = el.href.split('generate-users')[0] + 'generate-users';
+            let num = document.getElementById("num_input").value;
+            el.href = el.href + '/' + num;
+        }
+    </script>
+</body>
+</html>
