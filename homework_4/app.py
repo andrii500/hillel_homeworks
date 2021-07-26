@@ -8,7 +8,7 @@ def index():
                <p>Path: /sales?product=Value1&payment_type=Value2</p>"""
 
 
-@app.route("/summary")
+@app.route("/summary/")
 def get_summary():
     sales_ = Sales.query.all()
 
