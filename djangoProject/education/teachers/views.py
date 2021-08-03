@@ -1,13 +1,22 @@
 from django.http import HttpResponse
-from .models import Teachers
+
 from faker import Faker
+
+from .models import Teachers
 
 faker = Faker()
 
 
 def get_teachers(request):
-    teachers = Teachers.objects.create(first_name=faker.first_name(), last_name=faker.last_name(),
-                                       subject=faker.random_element(elements=('math', 'physics', 'history', 'literature')))
-    teachers_list = Teachers.objects.all()
-    output = ''.join([f"<p>{t.first_name} {t.last_name}, {t.subject}</p>" for t in teachers_list])
-    return HttpResponse(f"{output}")
+    args = request.GET
+    dict_param = {}
+    for key, value in args.items():
+        dict_param[key] = value
+    if dict_param:
+        teachers_list = Teachers.objects.filter(**dict_param)
+        output = ''.join([f"<p>{t.id}, {t.first_name} {t.last_name}, {t.age}, {t.subject}</p>" for t in teachers_list])
+        return HttpResponse(f"{output}")
+    else:
+        teachers_list = Teachers.objects.all()
+        output = ''.join([f"<p>{t.id}, {t.first_name} {t.last_name}, {t.age}, {t.subject}</p>" for t in teachers_list])
+        return HttpResponse(f"{output}")
